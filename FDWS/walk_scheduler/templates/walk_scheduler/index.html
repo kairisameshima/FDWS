@@ -1,0 +1,9 @@
+{% if all_appointments_list %}
+    <ul>
+    {% for appointment in all_appointments_list %}
+        <li><a href="{% url 'walk_scheduler:appointment' appointment.id %}">{{ appointment.walker}} - {{ appointment.time}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No appointments are available.</p>
+{% endif %}

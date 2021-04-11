@@ -1,0 +1,20 @@
+<p><a href="/walk_scheduler/">APPOINTMENTS INDEX</a></p>
+<p>Walker: {{appointment.walker.first_name}} {{appointment.walker.last_name}} </p>
+<p>Is walking dogs at: {{appointment.time|date:"SHORT_DATETIME_FORMAT"  }}</p>
+{% if all_walks_list %}
+    <ul>
+    {% for walk in all_walks_list %}
+        <li>{{ walk.dog.name}} - Pickup at {{walk.pickup_location}}</li>
+    {% endfor %}
+    </ul>
+    
+{% else %}
+    <p>No walks have been scheduled yet</p>
+{% endif %}
+
+<!-- Just in case we will also prevent the user from scheduling a walk by hiding scheduling link -->
+{% if all_walks_list.count <= 5 or not all_walks_list%}
+    <a href="{% url 'walk_scheduler:schedule_walk' appointment.id %}">schedule a walk</a>
+{% else %}
+Sorry, it looks like {{appointment.walker.first_name}} {{appointment.walker.last_name}} is all booked!
+{% endif %}

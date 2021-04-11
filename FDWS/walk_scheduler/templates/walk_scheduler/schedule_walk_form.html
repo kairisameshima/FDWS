@@ -1,0 +1,32 @@
+<p><a href="/walk_scheduler/">APPOINTMENTS INDEX</a></p>
+<p>Walker: {{appointment.walker.first_name}} {{appointment.walker.last_name}} </p>
+<p>Is walking dogs at: {{appointment.time|date:"SHORT_DATETIME_FORMAT"  }}</p>
+
+<p>Let's schedule a walk!</p>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'walk_scheduler:schedule_walk_submit' appointment.id %}" method = "post">
+    {% csrf_token %}
+    <p>
+        <label for="dog">Choose a dog</label>
+        <select name="dog", id="dog">
+            {% for dog in all_dogs_list %}
+            <option value="{{dog.id}}">{{dog.name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <!-- {% for dog in all_dogs_list %}
+    <input type="radio" name ="dog", id="dog{{forloog.counter}}" value="{{dog.id}}">
+    <label>{{dog.name}}</label>
+    {% endfor %} -->
+    <p>
+    <label for="pickup_location">Pickup Location</label>
+    <input type="text" name="pickup_location" id="pickup_location" required>
+    </p>
+    <p>
+        <label>Dropoff Location</label>
+        <input type="text" name="dropoff_location" id="dropoff_location" required>
+    </p>
+   
+    <input type="submit" value="schedule_walk">
+</form>
