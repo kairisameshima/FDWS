@@ -20,6 +20,8 @@ Each appointment can have up to 5 walks.
 
 A walk is the data structure used to store data for individual dogs. The dog and appointment are foreign key references
 and the walk object stores the pickup and dropoff locations.
+Please view the chart below:
+![Screenshot](screenshot.png)
 
 
 Current Functinality:
